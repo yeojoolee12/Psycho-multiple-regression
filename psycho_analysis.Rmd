@@ -1,0 +1,184 @@
+---
+title: "Multiple Linear Regression and Outcome Transformation"
+author: "Yeojoo Lee"
+date: "2026-09-28"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    theme: flatly
+    code_folding: show
+---
+
+## Overview
+
+This project applies multiple linear regression to examine whether
+post-treatment pathology levels can be predicted from pre-treatment
+symptom ratings of thinking disturbance and hostile suspiciousness.
+
+The analysis was completed as part of biostatistics coursework and
+demonstrates my experience with R programming, regression modeling,
+model diagnostics, and outcome transformation.
+
+## Data
+
+The dataset used in this analysis was provided as part of coursework
+and is not included in this repository.
+
+## Statistical Methods
+
+The primary outcome was the level of pathology six months after treatment.
+
+The predictors were:
+
+- **X1:** pre-treatment symptom rating of thinking disturbance
+- **X2:** pre-treatment symptom rating of hostile suspiciousness
+
+The analysis includes:
+
+- Multiple linear regression
+- Interpretation of regression coefficients
+- Assessment of regression assumptions
+- Residual diagnostics
+- Log transformation of the outcome
+- Comparison of model assumptions before and after transformation
+
+## Analysis
+
+### Multiple Linear Regression
+
+A multiple linear regression model was fitted using pathology level (Y)
+as the outcome and pre-treatment symptom ratings of thinking disturbance
+(X1) and hostile suspiciousness (X2) as predictors.
+
+```{r}
+psycho <- read.csv("psycho.csv")
+
+model <- lm(Y ~ X1 + X2, data = psycho)
+
+summary(model)
+```
+### Regression Equation
+
+The fitted regression model was:
+
+$$
+Y = -0.6354 + 23.4514X_1 - 7.0726X_2 + \epsilon
+$$
+### Interpretation of Regression Coefficients
+
+Holding X2 constant, a one-unit increase in thinking disturbance (X1)
+was associated with an estimated 23.45-unit increase in pathology level (Y).
+This association was statistically significant (p = 0.001).
+
+Holding X1 constant, a one-unit increase in hostile suspiciousness (X2)
+was associated with an estimated 7.07-unit decrease in pathology level (Y).
+This association was statistically significant (p = 0.02).
+
+### Model Diagnostics
+
+The assumptions of multiple linear regression were assessed using
+residual diagnostic plots, including a residuals-versus-predicted
+values plot, a histogram of residuals, and a Q-Q plot.
+
+The residuals were examined to assess linearity, homoscedasticity,
+and normality.
+
+Independence was considered based on the study design and data
+collection process.
+
+```{r}
+p <- predict(model)
+r <- resid(model)
+
+plot(p, r,
+     main = "Residuals vs. Predicted Values",
+     xlab = "Predicted Values",
+     ylab = "Residuals",
+     pch = 16)
+
+abline(h = 0)
+
+hist(r,
+     main = "Histogram of Residuals",
+     xlab = "Residuals",
+     ylab = "Frequency")
+
+library(car)
+
+qqPlot(r,
+       main = "Q-Q Plot of Residuals",
+       xlab = "Theoretical Quantiles",
+       ylab = "Sample Quantiles")
+```
+
+### Log Transformation of the Outcome
+
+A log transformation was applied to the outcome variable to assess
+whether the regression assumptions could be improved.
+
+```{r}
+model_log <- lm(log(Y) ~ X1 + X2, data = psycho)
+
+summary(model_log)
+```
+
+### Log-Transformed Regression Equation
+
+The fitted regression model after transforming the outcome was:
+
+$$
+\log(Y) = 2.2472 + 0.8562X_1 - 0.2895X_2 + \epsilon
+$$
+### Interpretation of Regression Coefficients
+
+Holding X2 constant, a one-unit increase in thinking disturbance (X1)
+was associated with a multiplicative change of
+exp(0.8562) ≈ 2.35 in the expected pathology level.
+
+Holding X1 constant, a one-unit increase in hostile suspiciousness (X2)
+was associated with a multiplicative change of
+exp(-0.2895) ≈ 0.75 in the expected pathology level,
+corresponding to approximately a 25% decrease.
+
+### Diagnostics After Log Transformation
+
+The residuals from the log-transformed model were examined using the
+same diagnostic plots to assess whether the model assumptions improved.
+
+```{r}
+p_log <- predict(model_log)
+r_log <- resid(model_log)
+
+plot(p_log, r_log,
+     main = "Residuals vs. Predicted Values (Log-Transformed Model)",
+     xlab = "Predicted Values",
+     ylab = "Residuals",
+     pch = 16)
+
+abline(h = 0)
+
+hist(r_log,
+     main = "Histogram of Residuals (Log-Transformed Model)",
+     xlab = "Residuals",
+     ylab = "Frequency")
+
+qqPlot(r_log,
+       main = "Q-Q Plot of Residuals (Log-Transformed Model)",
+       xlab = "Theoretical Quantiles",
+       ylab = "Sample Quantiles")
+```
+## Conclusion
+
+The original multiple linear regression model showed evidence of
+non-constant residual variance and departures from normality.
+
+After applying a log transformation to the outcome, the residual
+diagnostics indicated improved model assumptions, including more
+consistent residual variance and improved approximate normality.
+
+This analysis demonstrates the use of multiple linear regression,
+model diagnostics, and outcome transformation in R.
+
+
+
