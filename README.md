@@ -28,4 +28,4 @@ This repository contains a multiple linear regression analysis examining whether
 * `psycho_analysis.Rmd` : R Markdown source code containing the regression analysis and diagnostic plots.
 * `index.html` : Rendered HTML report.
 
-🔗 **Interactive Web Report:**https://yeojoolee12.github.io/psycho-multiple-regression/
+🔗 **Interactive Web Report:** https://yeojoolee12.github.io/Psycho-multiple-regression/
