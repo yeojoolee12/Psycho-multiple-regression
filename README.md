@@ -1,47 +1,33 @@
 # Multiple Linear Regression and Outcome Transformation
 
-## Overview
+This repository contains a multiple linear regression analysis examining whether post-treatment pathology levels can be predicted from pre-treatment symptom ratings of thinking disturbance and hostile suspiciousness.
 
-This project applies multiple linear regression to examine whether post-treatment pathology levels can be predicted from pre-treatment symptom ratings of thinking disturbance and hostile suspiciousness.
+## 📌 Project Overview
 
-The analysis was completed as part of biostatistics coursework and demonstrates my experience with **R programming, regression modeling, model diagnostics, and outcome transformation**.
+* **Objective:** To examine the association between post-treatment pathology level and pre-treatment symptom ratings of thinking disturbance and hostile suspiciousness using multiple linear regression.
+* **Dataset:** The dataset was provided as part of coursework and is not included in this repository.
+* **Outcome:** Post-treatment pathology level (`Y`).
+* **Predictors:** Thinking disturbance (`X1`) and hostile suspiciousness (`X2`).
 
-## Statistical Analysis
+## 🛠 Tools & Packages
 
-The analysis includes:
+* **Language:** R
+* **Packages:** `car`
 
-* Multiple linear regression
-* Regression coefficient interpretation
-* Assessment of regression assumptions
-* Residual diagnostics
-* Log transformation of the outcome
-* Comparison of model diagnostics before and after transformation
+## 📊 Key Analysis
 
-## Key Findings
+* Multiple linear regression modeling.
+* Interpretation of regression coefficients.
+* Assessment of regression assumptions using residual diagnostic plots.
+* Examination of linearity, homoscedasticity, and residual normality.
+* Log transformation of the outcome to assess model improvement.
+* Comparison of residual diagnostics before and after transformation.
 
-The original regression model was evaluated using residual diagnostic plots to assess model assumptions.
+## 📁 Repository Structure
 
-A log transformation of the outcome was then applied, and the residual diagnostics were examined again to assess whether the model assumptions improved.
+* `psycho_analysis.Rmd` : R Markdown source code containing the regression analysis and diagnostic plots.
+* `index.html` : Rendered HTML report.
 
-The analysis demonstrates how model diagnostics can guide the use of an outcome transformation in regression modeling.
+## 🔗 Interactive Web Report
 
-## Data
-
-The dataset used in this analysis was provided as part of coursework and is not included in this repository.
-
-## Files
-
-* `psycho_analysis.Rmd` — R Markdown source code
-* `index.html` — rendered HTML analysis report
-
-## Tools
-
-* **R**
-* **R Markdown**
-* **Multiple Linear Regression**
-* **Model Diagnostics**
-* **Data Visualization**
-
-## Note
-
-This project uses a coursework-provided dataset. The dataset itself is not included in this repository.
+https://yeojoolee12.github.io/psycho-multiple-regression/
